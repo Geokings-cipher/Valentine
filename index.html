@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine 💘</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- React CDN -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, sans-serif;
+      text-align: center;
+    }
+    button {
+      margin: 10px;
+      padding: 10px 20px;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script>
+    const { useState } = React;
+
+    const NO_PHRASES = [
+      "No 💔",
+      "Pretty please? 🥺",
+      "But we'd be so cute together! 💕",
+      "One more chance, pookie?",
+      "Don't break my heart :(",
+      "What about a maybe?",
+      "Please don't do this to me, I'm fragile",
+    ];
+
+    function App() {
+      const [noClicks, setNoClicks] = useState(0);
+      const [isValentine, setIsValentine] = useState(false);
+
+      const yesButtonSize = noClicks * 20 + 16;
+
+      const firstImg =
+        "https://media.tenor.com/VIChDQ6ejRQAAAAj/jumping-bear-hearts-no-png.gif";
+      const secondImg =
+        "https://media.tenor.com/f1xnRxTRxLAAAAAj/bears-with-kisses-bg.gif";
+
+      if (isValentine) {
+        return React.createElement(
+          "div",
+          null,
+          React.createElement("img", { src: secondImg, alt: "Happy bears" }),
+          React.createElement(
+            "div",
+            { style: { fontSize: "48px", color: "pink", fontWeight: "bold" } },
+            "Yayyyy I Loveee youuu Sooo sooo Extremelyyy and infinityyy muchhh Wifeyyyy!!! 💖🎉"
+          )
+        );
+      }
+
+      return React.createElement(
+        "div",
+        null,
+        React.createElement("img", { src: firstImg, alt: "Cute bear" }),
+        React.createElement("h1", null, "Will you be my Valentine? 💘"),
+        React.createElement(
+          "div",
+          null,
+          React.createElement(
+            "button",
+            {
+              onClick: () => setIsValentine(true),
+              style: {
+                fontSize: yesButtonSize + "px",
+                backgroundColor: "green",
+              },
+            },
+            "Yes"
+          ),
+          React.createElement(
+            "button",
+            {
+              onClick: () => setNoClicks(noClicks + 1),
+              style: { backgroundColor: "red" },
+            },
+            noClicks === 0
+              ? "No"
+              : NO_PHRASES[Math.min(noClicks - 1, NO_PHRASES.length - 1)]
+          )
+        )
+      );
+    }
+
+    ReactDOM.createRoot(document.getElementById("root")).render(
+      React.createElement(App)
+    );
+  </script>
+</body>
+</html>
